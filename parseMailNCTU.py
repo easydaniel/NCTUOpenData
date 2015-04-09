@@ -3,7 +3,7 @@ import urllib.request
 import urllib.parse
 
 
-dormURL = [ 'http://mailsys.nctu.edu.tw/MailNotify/main.asp?dorm=' + '{0:03}'.format(i) for i in range(86,103)]
+dormURL = [ 'http://mailsys.nctu.edu.tw/MailNotify/main.asp?dorm=' + '{0:03}'.format(i) for i in range(86,98)]
 mailData = []
 formatOfData = ['id','name','date','type']
 
@@ -16,15 +16,18 @@ for url in dormURL:
 	except:
 		continue
 	if tables:
+		dormName = soup.body.center.b.contents[0].replace('領信通知',' ').strip()
 		tables = tables[1:]
 		for t in tables:
 			lines = t.find_all('font')
-			tmpData = {'exist':True}
+			tmpData = {'exist':True,'dorm':dormName}
 			for index in range(0,4):
-				tmpData[formatOfData[index]] = lines[index].contents[0]
+				tmpData[formatOfData[index]] = lines[index].contents[0].strip()
 			mailData.append(tmpData)
-		
-# mailData = [{'id','name','date','type',exist}...]
+
+print(mailData)
+
+# mailData = [{'id','name','date','type','exist','dorm'}...]
 
 
 	
