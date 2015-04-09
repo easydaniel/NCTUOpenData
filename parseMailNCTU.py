@@ -23,9 +23,8 @@ for url in dormURL:
             tmpData = {'exist':True,'dorm':dormName}
             for index in range(0,4):
                 tmpData[formatOfData[index]] = lines[index].contents[0].strip()
-                mailData.append(tmpData)
+            mailData.append(tmpData)
 
-print(mailData)
 
 		
 
